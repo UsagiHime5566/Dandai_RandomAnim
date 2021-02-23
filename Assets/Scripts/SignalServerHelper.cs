@@ -6,8 +6,11 @@ using System.IO;
 [RequireComponent(typeof(SignalServer))]
 public class SignalServerHelper : MonoBehaviour
 {
+    [HimeLib.HelpBox] public string tip = "負責讀入txt, 藉此設定Server 相關設定";
     public string fileName = "Server.txt";
     
+
+    public int TotalPlayer = 0;
     
     //Root dictionary of application , without '/'
     string exePath, filePath;
@@ -28,13 +31,17 @@ public class SignalServerHelper : MonoBehaviour
         if(!File.Exists(filePath))
             return;
 
-        StreamReader reader = new StreamReader(filePath); 
+        StreamReader reader = new StreamReader(filePath);
+        string _totalPlayer = reader.ReadLine(); 
         string _serverPort = reader.ReadLine();
         string _maxUsers = reader.ReadLine();
         string _buffSize = reader.ReadLine();
         string _EndToken = reader.ReadLine();
         reader.Close();
 
+        int totalPlayer = 0;
+        if(int.TryParse(_totalPlayer, out totalPlayer))
+            TotalPlayer = totalPlayer;
         int serverPort = 25566;
         if(int.TryParse(_serverPort, out serverPort))
             signalServer.serverPort = serverPort;

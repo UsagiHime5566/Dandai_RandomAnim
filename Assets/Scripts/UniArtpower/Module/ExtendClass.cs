@@ -49,4 +49,8 @@ public static class ExtentTransform
         }
         return null;
     }
+
+    public static void TranslateAnchor(this RectTransform rectTransform, float x, float y){
+        rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x + x, rectTransform.anchoredPosition.y + y);
+    }
 }
