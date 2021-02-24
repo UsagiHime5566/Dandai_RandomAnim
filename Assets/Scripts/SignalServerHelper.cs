@@ -4,20 +4,20 @@ using UnityEngine;
 using System.IO;
 
 [RequireComponent(typeof(SignalServer))]
+[RequireComponent(typeof(ServerPlayer))]
 public class SignalServerHelper : MonoBehaviour
 {
     [HimeLib.HelpBox] public string tip = "負責讀入txt, 藉此設定Server 相關設定";
     public string fileName = "Server.txt";
     
-
-    public int TotalPlayer = 0;
-    
     //Root dictionary of application , without '/'
     string exePath, filePath;
     SignalServer signalServer;
+    ServerPlayer serverPlayer;
 
     void Awake(){
         signalServer = GetComponent<SignalServer>();
+        serverPlayer = GetComponent<ServerPlayer>();
         exePath = Path.GetDirectoryName(Application.dataPath);
         filePath = exePath + "/" + fileName;
     }
@@ -41,7 +41,7 @@ public class SignalServerHelper : MonoBehaviour
 
         int totalPlayer = 0;
         if(int.TryParse(_totalPlayer, out totalPlayer))
-            TotalPlayer = totalPlayer;
+            serverPlayer.totalPlayers = totalPlayer;
         int serverPort = 25566;
         if(int.TryParse(_serverPort, out serverPort))
             signalServer.serverPort = serverPort;

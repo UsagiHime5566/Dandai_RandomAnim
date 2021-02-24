@@ -9703,6 +9703,7 @@ GameObject:
   - component: {fileID: 1951525684}
   - component: {fileID: 1951525686}
   - component: {fileID: 1951525685}
+  - component: {fileID: 1951525687}
   m_Layer: 0
   m_Name: SignalServer
   m_TagString: Untagged
@@ -9738,7 +9739,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tip: "\u8CA0\u8CAC\u8B80\u5165txt, \u85C9\u6B64\u8A2D\u5B9AServer \u76F8\u95DC\u8A2D\u5B9A"
   fileName: Server.txt
-  TotalPlayer: 0
 --- !u!114 &1951525686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9759,9 +9759,28 @@ MonoBehaviour:
   OnSignalReceived:
     m_PersistentCalls:
       m_Calls: []
+  OnUserConnected:
+    m_PersistentCalls:
+      m_Calls: []
   runInStart: 1
   signalForRecieved: 
   signalForSend: Play
+--- !u!114 &1951525687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951525683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac858c97bbf583488e9804dcd5b86bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RecvSignalToReplay: End
+  SendSignalToPlay: Play
+  delayToReplay: 3000
+  totalPlayers: 1
 --- !u!1 &1959773367
 GameObject:
   m_ObjectHideFlags: 0

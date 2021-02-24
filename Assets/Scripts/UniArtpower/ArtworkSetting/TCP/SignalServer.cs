@@ -18,6 +18,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
 
     [HimeLib.HelpBox] public string tip = "所有的訊息接編碼為UTF-8";
     public SocketSignalEvent OnSignalReceived;
+    public UserConnectedEvent OnUserConnected;
 
     [Header("Auto Work")]
     public bool runInStart = false;
@@ -26,11 +27,6 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
     Socket serverSocket; //服務器端socket  
     Socket [] clientSockets; //客戶端socket  
     IPEndPoint ipEnd; //偵聽端口  
-    string recvStr; //接收的字符串
-    string sendStr; //發送的字符串
-    byte[] recvData = new byte[1024]; //接收的數據，必須為字節  
-    byte[] sendData = new byte[1024]; //發送的數據，必須為字節  
-    int recvLen; //接收的數據長度
     string [] token;
     Thread [] connectThread; //連接線程
     Action ActionQueue;
@@ -78,8 +74,9 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         //進入接收循環  
         while (true)
         {
-            //對data清零  
-            recvData = new byte[recvBufferSize];
+            byte[] recvData = new byte[recvBufferSize];
+            int recvLen = 0;
+            string recvStr;
             try
             {
                 //獲取收到的數據的長度  
@@ -100,7 +97,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
             recvStr = Encoding.UTF8.GetString(recvData, 0, recvLen);
 
             //N[/TCP]
-            //Debug.Log(recvStr);
+            //Debug.Log($"TCP >> Raw msg : {recvStr}");
 
             //Recieve Data Will Be   245,135,90[/TCP]   , str 不會包含[/TCP]
             string[] clearString = recvStr.Split(token, StringSplitOptions.None);  // => N , [/TCP]
@@ -133,9 +130,25 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
 
         //連接成功則發送數據  
         //sendStr="Welcome to my server";
-        //SocketSend(sendStr);  
+        //SocketSend(sendStr);
+
+        OnUserConnected?.Invoke(GetCurrentClientsNum());
 
         return clientSockets[index];
+    }
+
+    int GetCurrentClientsNum(){
+        int onlineUsers = 0;
+        foreach (var clientSocket in clientSockets)
+        {
+            if(clientSocket == null)
+                continue;
+
+            if(clientSocket.Connected)
+                onlineUsers += 1;
+        }
+
+        return onlineUsers;
     }
 
     //Data to Glass can use UTF8
@@ -144,19 +157,19 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         foreach (var clientSocket in clientSockets)
         {
             if (clientSocket == null)
-                return;
+                continue;
             if (clientSocket.Connected == false)
-                return;
+                continue;
             try {
-                sendStr = sendStr + EndToken;
+                var toSend = sendStr + EndToken;
                 //清空發送緩存  
-                sendData = new byte[1024];
+                var sendData = new byte[1024];
                 //數據類型轉換  
-                sendData = Encoding.UTF8.GetBytes(sendStr);
+                sendData = Encoding.UTF8.GetBytes(toSend);
                 //發送  
                 clientSocket.Send(sendData, sendData.Length, SocketFlags.None);
 
-                Debug.Log ($"TCP >> Send: {sendStr}");
+                Debug.Log ($"TCP >> Send: {toSend}");
             }
             catch(System.Exception e){
                 Debug.LogError(e.Message.ToString());
@@ -220,7 +233,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         SocketSend(signalForSend);
     }
 
-    [Serializable]
-    public class SocketSignalEvent : UnityEvent<string>
-    {}
+    [Serializable] public class SocketSignalEvent : UnityEvent<string> {}
+
+    [Serializable] public class UserConnectedEvent : UnityEvent<int> {}
 }
