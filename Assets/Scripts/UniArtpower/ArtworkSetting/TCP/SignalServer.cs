@@ -129,7 +129,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         //獲取客戶端的IP和端口  
         IPEndPoint ipEndClient = (IPEndPoint)clientSockets[index].RemoteEndPoint;
         //輸出客戶端的IP和端口  
-        Debug.Log("Connect with " + ipEndClient.Address.ToString() + ":" + ipEndClient.Port.ToString());
+        Debug.Log($"Thread ({index}) Connect with " + ipEndClient.Address.ToString() + ":" + ipEndClient.Port.ToString());
 
         //連接成功則發送數據  
         //sendStr="Welcome to my server";
