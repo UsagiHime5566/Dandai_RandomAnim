@@ -54,5 +54,7 @@ public class SignalServerHelper : MonoBehaviour
 
         if(!string.IsNullOrEmpty(_EndToken))
             signalServer.EndToken = _EndToken;
+
+        signalServer.InitSocket();
     }
 }

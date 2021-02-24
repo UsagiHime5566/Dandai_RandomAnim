@@ -24,7 +24,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
 
     // Private works
     Socket serverSocket; //服務器端socket  
-    Socket clientSocket; //客戶端socket  
+    Socket [] clientSockets; //客戶端socket  
     IPEndPoint ipEnd; //偵聽端口  
     string recvStr; //接收的字符串
     string sendStr; //發送的字符串
@@ -32,21 +32,13 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
     byte[] sendData = new byte[1024]; //發送的數據，必須為字節  
     int recvLen; //接收的數據長度
     string [] token;
-    Thread connectThread; //連接線程
+    Thread [] connectThread; //連接線程
     Action ActionQueue;
 
     // Use this for initialization
-    async void Start()
+    void Start()
     {
         token = new string[]{ EndToken };
-
-        await Task.Delay(1000);
-
-        if(this == null) return;
-
-        if(!runInStart) return;
-
-        InitSocket();
     }
 
     void Update(){
@@ -66,17 +58,23 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         //開始偵聽,最大10個連接  
         serverSocket.Listen(maxUsers);
 
-        //開啟一個線程連接，必須的，否則主線程卡死  
-        connectThread = new Thread(ServerWork);
-        connectThread.Start();
-
-        Debug.Log("Start Server at :" + serverPort);
+        ClearThreads();
+        ClearClients();
+        for (int i = 0; i < maxUsers; i++)
+        {
+            //開啟一個線程連接，必須的，否則主線程卡死
+            int targetIndex = i;
+            connectThread[targetIndex] = new Thread(() => ServerWork(targetIndex));
+            connectThread[targetIndex].Start();
+        }
+        
+        Debug.Log($"Start Server at :{serverPort} , with {maxUsers} thread.");
     }
 
-    void ServerWork()
+    void ServerWork(int index)
     {
         //連接
-        SocketConnet();
+        Socket currSocket = SocketConnet(index);
         //進入接收循環  
         while (true)
         {
@@ -85,17 +83,17 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
             try
             {
                 //獲取收到的數據的長度  
-                recvLen = clientSocket.Receive(recvData);
+                recvLen = currSocket.Receive(recvData);
             }
             catch (System.Net.Sockets.SocketException)
             {
-                SocketConnet();
+                SocketConnet(index);
                 continue;
             }
             //如果收到的數據長度為0，則重連並進入下一個循環  
             if (recvLen == 0)
             {
-                SocketConnet();
+                SocketConnet(index);
                 continue;
             }
             //輸出接收到的數據  
@@ -119,58 +117,86 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         }  // end While
     }
 
-    void SocketConnet()
+    Socket SocketConnet(int index)
     {
-        if (clientSocket != null)
-            clientSocket.Close();
+        if (clientSockets[index] != null)
+            clientSockets[index].Close();
+
         //控制台輸出偵聽狀態
-        print("Waiting for a client");
+        print($"Waiting for a client ({index})");
         //一旦接受連接，創建一個客戶端  
-        clientSocket = serverSocket.Accept();
+        clientSockets[index] = serverSocket.Accept();
         //獲取客戶端的IP和端口  
-        IPEndPoint ipEndClient = (IPEndPoint)clientSocket.RemoteEndPoint;
+        IPEndPoint ipEndClient = (IPEndPoint)clientSockets[index].RemoteEndPoint;
         //輸出客戶端的IP和端口  
         Debug.Log("Connect with " + ipEndClient.Address.ToString() + ":" + ipEndClient.Port.ToString());
 
         //連接成功則發送數據  
         //sendStr="Welcome to my server";
         //SocketSend(sendStr);  
+
+        return clientSockets[index];
     }
 
     //Data to Glass can use UTF8
     public void SocketSend(string sendStr)
     {
-        if (clientSocket == null)
-            return;
-        if (clientSocket.Connected == false)
-            return;
-        try {
-            sendStr = sendStr + EndToken;
-            //清空發送緩存  
-            sendData = new byte[1024];
-            //數據類型轉換  
-            sendData = Encoding.UTF8.GetBytes(sendStr);
-            //發送  
-            clientSocket.Send(sendData, sendData.Length, SocketFlags.None);
+        foreach (var clientSocket in clientSockets)
+        {
+            if (clientSocket == null)
+                return;
+            if (clientSocket.Connected == false)
+                return;
+            try {
+                sendStr = sendStr + EndToken;
+                //清空發送緩存  
+                sendData = new byte[1024];
+                //數據類型轉換  
+                sendData = Encoding.UTF8.GetBytes(sendStr);
+                //發送  
+                clientSocket.Send(sendData, sendData.Length, SocketFlags.None);
 
-            Debug.Log ($"TCP >> Send: {sendStr}");
+                Debug.Log ($"TCP >> Send: {sendStr}");
+            }
+            catch(System.Exception e){
+                Debug.LogError(e.Message.ToString());
+            }
         }
-        catch(System.Exception e){
-            Debug.LogError(e.Message.ToString());
+    }
+
+    void ClearThreads(){
+        if(connectThread != null){
+            foreach (var item in connectThread)
+            {
+                if(item != null){
+                    item.Interrupt();
+                    item.Abort();
+                }
+                
+            }
         }
+        connectThread = new Thread[maxUsers];
+    }
+
+    void ClearClients(){
+        if(clientSockets != null){
+            foreach (var item in clientSockets)
+            {
+                if(item != null){
+                    item.Close();
+                }
+            }
+        }
+        clientSockets = new Socket[maxUsers];
     }
 
     void CloseSocket()
     {
         //先關閉客戶端  
-        if (clientSocket != null)
-            clientSocket.Close();
+        ClearClients();
+        
         //再關閉線程  
-        if (connectThread != null)
-        {
-            connectThread.Interrupt();
-            connectThread.Abort();
-        }
+        ClearThreads();
         //最後關閉服務器
         if (serverSocket != null)
         {
