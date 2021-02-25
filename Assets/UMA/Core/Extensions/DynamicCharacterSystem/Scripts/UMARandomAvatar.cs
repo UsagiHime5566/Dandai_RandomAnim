@@ -23,7 +23,7 @@ namespace UMA
 		private GameObject character;
 
 		// Use this for initialization
-		void Start()
+		void NoStart()
 		{
 			if (ParentObject == null)
 			{
@@ -72,11 +72,13 @@ namespace UMA
 		}
 
 
-		public void GenerateRandomCharacter(Vector3 Pos, Quaternion Rot, string Name)
+		public GameObject GenerateRandomCharacter(Vector3 Pos, Quaternion Rot, string Name)
 		{
+			GameObject go = null;
+
 			if (prefab)
 			{
-				GameObject go = GameObject.Instantiate(prefab, Pos, Rot);
+				go = GameObject.Instantiate(prefab, Pos, Rot);
 				if (ParentObject != null)
 				{
 					go.transform.parent = ParentObject.transform;
@@ -91,6 +93,8 @@ namespace UMA
 			}
 			Randomize(RandomAvatar);
 			RandomAvatar.BuildCharacter(!RandomAvatar.BundleCheck);
+
+			return go;
 		}
 
 		public RandomWardrobeSlot GetRandomWardrobe(List<RandomWardrobeSlot> wardrobeSlots)

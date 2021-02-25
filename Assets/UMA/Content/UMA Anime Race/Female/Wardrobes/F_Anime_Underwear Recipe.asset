@@ -29,7 +29,7 @@ MonoBehaviour:
   activeWardrobeSet: []
   MeshHideAssets:
   - {fileID: 11400000, guid: 69ea5daa9cf2565418b69afc4b7d136a, type: 2}
-  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"F_Anime_Underwear","scale":100,"copyIdx":-1,"overlays":[{"id":"F_Anime_Bra_Overlay","colorIdx":0,"rect":[0.0,0.0,0.0,0.0]}]},{"id":"","scale":1,"copyIdx":-1,"overlays":[]},{"id":"F_Anime_Bra","scale":100,"copyIdx":0,"overlays":[]}],"colors":[],"fColors":[{"name":"-","colors":[255,255,255,255,0,0,0,0]}],"sharedColorCount":0,"race":"","packedDna":[]}'
+  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"F_Anime_Underwear","scale":100,"copyIdx":-1,"overlays":[{"id":"F_Anime_Bra_Overlay","colorIdx":0,"rect":[0.0,0.0,0.0,0.0],"isTransformed":false,"scale":{"x":0.0,"y":0.0,"z":0.0},"rotation":0.0}],"Tags":[],"Races":[]},{"id":"","scale":1,"copyIdx":-1,"overlays":[],"Tags":[],"Races":[]},{"id":"F_Anime_Bra","scale":100,"copyIdx":0,"overlays":[],"Tags":[],"Races":[]}],"colors":[],"fColors":[{"name":"-","colors":[255,255,255,255,0,0,0,0],"ShaderParms":[]}],"sharedColorCount":0,"race":"","packedDna":[]}'
   IncompatibleRecipes: []
   UserField: 
   replaces: Nothing

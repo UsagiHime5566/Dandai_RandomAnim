@@ -22,7 +22,7 @@ MonoBehaviour:
   - race: Anime Male
     filename: 
     thumb: {fileID: 0}
-  wardrobeSlot: None
+  wardrobeSlot: Legs
   Hides: []
   HideTags: []
   suppressWardrobeSlots: []
@@ -30,7 +30,7 @@ MonoBehaviour:
   MeshHideAssets:
   - {fileID: 11400000, guid: 1a364611e94fd0949a82677468d22ccc, type: 2}
   - {fileID: 11400000, guid: df0504af463b6b04ea9c12ace7999c85, type: 2}
-  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"","scale":1,"copyIdx":-1,"overlays":[],"Tags":[],"Races":[]}],"colors":[],"fColors":[],"sharedColorCount":0,"race":"","packedDna":[]}'
+  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"","scale":1,"copyIdx":-1,"overlays":[],"Tags":[],"Races":[]},{"id":"","scale":1,"copyIdx":-1,"overlays":[],"Tags":[],"Races":[]},{"id":"M_Anime_Underwear","scale":100,"copyIdx":-1,"overlays":[{"id":"F_Anime_Bra_Overlay","colorIdx":0,"rect":[0.0,0.0,0.0,0.0],"isTransformed":false,"scale":{"x":1.0,"y":1.0,"z":1.0},"rotation":0.0}],"Tags":[],"Races":[]}],"colors":[],"fColors":[{"name":"","colors":[255,255,255,255,0,0,0,0],"ShaderParms":[]}],"sharedColorCount":0,"race":"","packedDna":[]}'
   IncompatibleRecipes: []
   UserField: 
   replaces: Nothing
