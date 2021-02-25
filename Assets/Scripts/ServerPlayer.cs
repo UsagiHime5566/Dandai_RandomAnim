@@ -14,6 +14,9 @@ public class ServerPlayer : MonoBehaviour
     [Header("Runtime Messages")]
     public int totalPlayers = 1;
 
+
+    public System.Action OnServerStartPlay;
+
     // private works
     SignalServer signalServer;
     int curPlayers = 0;
@@ -44,6 +47,7 @@ public class ServerPlayer : MonoBehaviour
     void UserConnected(int onlineUsers){
         if(onlineUsers >= totalPlayers){
             signalServer.SocketSend(SendSignalToPlay);
+            OnServerStartPlay?.Invoke();
         }
     }
 
@@ -51,5 +55,6 @@ public class ServerPlayer : MonoBehaviour
     {
         await Task.Delay(delayToReplay);
         signalServer.SocketSend(SendSignalToPlay);
+        OnServerStartPlay?.Invoke();
     }
 }

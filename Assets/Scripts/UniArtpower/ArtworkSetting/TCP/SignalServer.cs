@@ -132,7 +132,9 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         //sendStr="Welcome to my server";
         //SocketSend(sendStr);
 
-        OnUserConnected?.Invoke(GetCurrentClientsNum());
+        ActionQueue += delegate {
+            OnUserConnected?.Invoke(GetCurrentClientsNum());
+        };
 
         return clientSockets[index];
     }
