@@ -12,7 +12,7 @@ public class CustomGenerator : MonoBehaviour
     public Vector3 bornPos = Vector3.zero;
     void Start()
     {
-        StartGenerate();
+        //StartGenerate();
     }
 
     
@@ -21,6 +21,10 @@ public class CustomGenerator : MonoBehaviour
             Destroy(currentTrack);
 
         currentTrack = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.identity, "Generate Avator");
+    }
+
+    public GameObject GetNewUMA(){
+        return  umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.identity, "Generate Avator");
     }
 
 

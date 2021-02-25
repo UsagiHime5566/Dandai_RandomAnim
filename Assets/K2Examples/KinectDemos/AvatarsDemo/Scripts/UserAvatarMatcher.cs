@@ -117,7 +117,7 @@ public class UserAvatarMatcher : MonoBehaviour
 		return checksum;
 	}
 
-
+	public CustomGenerator UMAGenerator;
 	// creates avatar for the given user
 	private GameObject CreateUserAvatar(long userId, int userIndex)
 	{
@@ -128,7 +128,7 @@ public class UserAvatarMatcher : MonoBehaviour
 			Vector3 userPos = new Vector3(userIndex, 0, 0);
 			Quaternion userRot = Quaternion.Euler(!mirroredMovement ? Vector3.zero : new Vector3(0, 180, 0));
 
-			avatarObj = Instantiate(avatarModel, userPos, userRot);
+			avatarObj = avatarModel = UMAGenerator.GetNewUMA();
 			avatarObj.name = "User-" + userId;
 
 			AvatarController ac = avatarObj.GetComponent<AvatarController>();
