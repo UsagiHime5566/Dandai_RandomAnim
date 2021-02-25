@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UserAvatarMatcher : MonoBehaviour 
@@ -128,7 +129,7 @@ public class UserAvatarMatcher : MonoBehaviour
 			Vector3 userPos = new Vector3(userIndex, 0, 0);
 			Quaternion userRot = Quaternion.Euler(!mirroredMovement ? Vector3.zero : new Vector3(0, 180, 0));
 
-			avatarObj = avatarModel = UMAGenerator.GetNewUMA();
+			avatarObj = UMAGenerator.GetNewUMA();
 			avatarObj.name = "User-" + userId;
 
 			AvatarController ac = avatarObj.GetComponent<AvatarController>();

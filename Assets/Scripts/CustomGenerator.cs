@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UMA;
+using System.Threading.Tasks;
 
 public class CustomGenerator : MonoBehaviour
 {
@@ -20,12 +21,22 @@ public class CustomGenerator : MonoBehaviour
         if(currentTrack != null)
             Destroy(currentTrack);
 
-        currentTrack = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.identity, "Generate Avator");
+        currentTrack = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.Euler(0, 180, 0), "Generate Avator");
+        RemoveRigidBody(currentTrack);
     }
 
     public GameObject GetNewUMA(){
-        return  umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.identity, "Generate Avator");
+        GameObject temp = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.Euler(0, 180, 0), "Generate Avator");
+        RemoveRigidBody(temp);
+        return temp;
     }
+
+    async void RemoveRigidBody(GameObject avatarObj){
+		await Task.Delay(100);
+		Debug.Log("Try to remove:" + avatarObj.GetComponent<Rigidbody>());
+		Destroy(avatarObj.GetComponent<Rigidbody>());
+		Destroy(avatarObj.GetComponent<Collider>());
+	}
 
 
     void Update()
