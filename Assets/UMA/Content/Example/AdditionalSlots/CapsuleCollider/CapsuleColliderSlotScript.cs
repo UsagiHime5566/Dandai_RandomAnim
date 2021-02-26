@@ -8,7 +8,8 @@ namespace UMA
 	/// </summary>
 	public class CapsuleColliderSlotScript : MonoBehaviour
 	{
-		public void OnDnaApplied(UMAData umaData)
+		public void OnDnaApplied(UMAData umaData){}
+		public void OnDnaApplied_(UMAData umaData)
 		{
 			var rigid = umaData.gameObject.GetComponent<Rigidbody>();
 			if (rigid == null)

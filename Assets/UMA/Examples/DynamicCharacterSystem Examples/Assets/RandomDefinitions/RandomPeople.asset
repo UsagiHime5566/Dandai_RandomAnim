@@ -72,8 +72,8 @@ MonoBehaviour:
       MaxValue: 1
       Delete: 0
     - DnaName: armLength
-      MinValue: 0.25
-      MaxValue: 1
+      MinValue: 0.5872781
+      MaxValue: 0.9171598
       Delete: 0
     - DnaName: armWidth
       MinValue: 0
@@ -274,12 +274,12 @@ MonoBehaviour:
       MaxValue: 1
       Delete: 0
     - DnaName: armLength
-      MinValue: 0
-      MaxValue: 1
+      MinValue: 0.6213018
+      MaxValue: 0.89349115
       Delete: 0
     - DnaName: forearmLength
-      MinValue: 0
-      MaxValue: 1
+      MinValue: 0.33136094
+      MaxValue: 0.4970414
       Delete: 0
     - DnaName: armWidth
       MinValue: 0

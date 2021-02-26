@@ -130,12 +130,14 @@ public class UserAvatarMatcher : MonoBehaviour
 			Quaternion userRot = Quaternion.Euler(!mirroredMovement ? Vector3.zero : new Vector3(0, 180, 0));
 
 			avatarObj = UMAGenerator.GetNewUMA();
+			//avatarObj = Instantiate(avatarModel, userPos, userRot);
 			avatarObj.name = "User-" + userId;
 
 			AvatarController ac = avatarObj.GetComponent<AvatarController>();
 			if (ac == null) 
 			{
-				ac = avatarObj.AddComponent<AvatarController>();
+				//ac = avatarObj.AddComponent<AvatarController>();
+				ac = avatarObj.AddComponent<OverrideAvatarController>();
 				ac.playerIndex = userIndex;
 
 				ac.smoothFactor = smoothFactor;

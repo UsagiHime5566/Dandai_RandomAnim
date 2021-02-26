@@ -81,11 +81,11 @@ public class AvatarController : MonoBehaviour
 
 
 	// The body root node
-	protected Transform bodyRoot;
+	public Transform bodyRoot;
 
 	// Variable to hold all them bones. It will initialize the same size as initialRotations.
-	protected Transform[] bones;
-	protected Transform[] fingerBones;
+	public Transform[] bones;
+	public Transform[] fingerBones;
 
 	// Rotations of the bones when the Kinect tracking starts.
 	protected Quaternion[] initialRotations;
@@ -1158,6 +1158,8 @@ public class AvatarController : MonoBehaviour
 			if (!boneIndex2MecanimMap.ContainsKey(boneIndex)) 
 				continue;
 			
+			Debug.Log($"index '{boneIndex}' , bone: {boneIndex2MecanimMap[boneIndex]} , bone: {animatorComponent.GetBoneTransform(boneIndex2MecanimMap[boneIndex])}");
+
 			bones[boneIndex] = animatorComponent ? animatorComponent.GetBoneTransform(boneIndex2MecanimMap[boneIndex]) : null;
 		}
 
@@ -1170,6 +1172,16 @@ public class AvatarController : MonoBehaviour
 				continue;
 
 			fingerBones[boneIndex] = animatorComponent ? animatorComponent.GetBoneTransform(fingerIndex2MecanimMap[boneIndex]) : null;
+		}
+	}
+
+	[EasyButtons.Button]
+	void LogBones(){
+		for (int boneIndex = 0; boneIndex < bones.Length; boneIndex++){
+			if (!boneIndex2MecanimMap.ContainsKey(boneIndex))
+				continue;
+				
+			Debug.Log($"index '{boneIndex}' , bone: {boneIndex2MecanimMap[boneIndex]} , bone: {animatorComponent.GetBoneTransform(boneIndex2MecanimMap[boneIndex])}");
 		}
 	}
 	

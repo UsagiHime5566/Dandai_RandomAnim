@@ -221,6 +221,93 @@ MonoBehaviour:
   groundedFeet: 1
   applyMuscleLimits: 1
   UMAGenerator: {fileID: 339988122}
+--- !u!1 &129557213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129557214}
+  - component: {fileID: 129557215}
+  m_Layer: 0
+  m_Name: BoneHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &129557214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129557213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &129557215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129557213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5e445dab0fb20459aa23f9123af361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  MapBones:
+  - index: 0
+    boneName: Hips
+  - index: 1
+    boneName: LowerBack
+  - index: 3
+    boneName: Neck
+  - index: 5
+    boneName: LeftArm
+  - index: 6
+    boneName: LeftForeArm
+  - index: 7
+    boneName: LeftHand
+  - index: 11
+    boneName: RightArm
+  - index: 12
+    boneName: RightForeArm
+  - index: 13
+    boneName: RightHand
+  - index: 17
+    boneName: LeftUpLeg
+  - index: 18
+    boneName: LeftLeg
+  - index: 19
+    boneName: LeftFoot
+  - index: 21
+    boneName: RightUpLeg
+  - index: 22
+    boneName: RightLeg
+  - index: 23
+    boneName: RightFoot
+  - index: 25
+    boneName: LeftShoulder
+  - index: 26
+    boneName: RightShoulder
+  - index: 27
+    boneName: LeftHandFinger04_01
+  - index: 28
+    boneName: RightHandFinger04_01
+  - index: 29
+    boneName: LeftHandFinger05_01
+  - index: 30
+    boneName: RightHandFinger05_01
 --- !u!1 &148304656
 GameObject:
   m_ObjectHideFlags: 0

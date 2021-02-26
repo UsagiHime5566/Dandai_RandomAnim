@@ -22,21 +22,22 @@ public class CustomGenerator : MonoBehaviour
             Destroy(currentTrack);
 
         currentTrack = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.Euler(0, 180, 0), "Generate Avator");
-        RemoveRigidBody(currentTrack);
+        //RemoveRigidBody(currentTrack);
     }
 
     public GameObject GetNewUMA(){
         GameObject temp = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.Euler(0, 180, 0), "Generate Avator");
-        RemoveRigidBody(temp);
+        //RemoveRigidBody(temp);
         return temp;
     }
 
-    async void RemoveRigidBody(GameObject avatarObj){
-		await Task.Delay(100);
-		Debug.Log("Try to remove:" + avatarObj.GetComponent<Rigidbody>());
-		Destroy(avatarObj.GetComponent<Rigidbody>());
-		Destroy(avatarObj.GetComponent<Collider>());
-	}
+    // async void RemoveRigidBody(GameObject avatarObj){
+    //     Debug.Break();
+	// 	await Task.Delay(100);
+	// 	Debug.Log("Try to remove:" + avatarObj.GetComponent<Rigidbody>());
+	// 	Destroy(avatarObj.GetComponent<Rigidbody>());
+	// 	Destroy(avatarObj.GetComponent<Collider>());
+	// }
 
 
     void Update()
