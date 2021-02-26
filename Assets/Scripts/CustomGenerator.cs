@@ -25,8 +25,8 @@ public class CustomGenerator : MonoBehaviour
         //RemoveRigidBody(currentTrack);
     }
 
-    public GameObject GetNewUMA(){
-        GameObject temp = umaRandomer.GenerateRandomCharacter(bornPos, Quaternion.Euler(0, 180, 0), "Generate Avator");
+    public GameObject GetNewUMA(Vector3 pos, Quaternion rot){
+        GameObject temp = umaRandomer.GenerateRandomCharacter(pos, rot, "Generate Avator");
         //RemoveRigidBody(temp);
         return temp;
     }

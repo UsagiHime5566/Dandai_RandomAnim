@@ -63,45 +63,9 @@ MonoBehaviour:
       MinValue: 0.53125
       MaxValue: 0.9296875
       Delete: 0
-    - DnaName: headSize
-      MinValue: 0.3671875
-      MaxValue: 0.90625
-      Delete: 0
     - DnaName: headWidth
-      MinValue: 0.3515625
-      MaxValue: 1
-      Delete: 0
-    - DnaName: armLength
-      MinValue: 0.5872781
-      MaxValue: 0.9171598
-      Delete: 0
-    - DnaName: armWidth
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: handsSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: feetSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: upperMuscle
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: lowerMuscle
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: legsSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: earsSize
-      MinValue: 0
-      MaxValue: 1
+      MinValue: 0.20004734
+      MaxValue: 0.8080808
       Delete: 0
     - DnaName: noseSize
       MinValue: 0
@@ -112,26 +76,6 @@ MonoBehaviour:
       MaxValue: 1
       Delete: 0
     - DnaName: noseCurve
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: chinSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: mandibleSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: jawsSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: cheekSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: foreheadSize
       MinValue: 0
       MaxValue: 1
       Delete: 0
@@ -155,11 +99,55 @@ MonoBehaviour:
       MinValue: 0
       MaxValue: 1
       Delete: 0
-    - DnaName: foreheadPosition
+    - DnaName: earsSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: earsPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: chinSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: chinPronounced
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: chinPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: jawsSize
       MinValue: 0
       MaxValue: 1
       Delete: 0
     - DnaName: jawsPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: cheekSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: cheekPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: foreheadSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: foreheadPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: mandibleSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: upperWeight
       MinValue: 0
       MaxValue: 1
       Delete: 0
@@ -223,7 +211,7 @@ MonoBehaviour:
     - eyeSize
     - breastSize
     - eyeSpacing
-    SelectedDNA: 37
+    SelectedDNA: 16
     DNAAdd: 
     DNADel: 0
   - RaceName: Anime Female
@@ -259,41 +247,13 @@ MonoBehaviour:
       Delete: 0
     - DnaName: height
       MinValue: 0.515625
-      MaxValue: 0.8359375
-      Delete: 0
-    - DnaName: headSize
-      MinValue: 0.3046875
-      MaxValue: 0.8984375
+      MaxValue: 0.7450284
       Delete: 0
     - DnaName: headWidth
-      MinValue: 0
+      MinValue: 0.20879121
       MaxValue: 1
       Delete: 0
     - DnaName: neckThickness
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: armLength
-      MinValue: 0.6213018
-      MaxValue: 0.89349115
-      Delete: 0
-    - DnaName: forearmLength
-      MinValue: 0.33136094
-      MaxValue: 0.4970414
-      Delete: 0
-    - DnaName: armWidth
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: handsSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: feetSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: earsSize
       MinValue: 0
       MaxValue: 1
       Delete: 0
@@ -305,35 +265,11 @@ MonoBehaviour:
       MinValue: 0
       MaxValue: 1
       Delete: 0
-    - DnaName: chinSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: jawsSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: cheekSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
     - DnaName: lipsSize
       MinValue: 0
       MaxValue: 1
       Delete: 0
-    - DnaName: eyeSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
     - DnaName: mouthSize
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: eyeSpacing
-      MinValue: 0
-      MaxValue: 1
-      Delete: 0
-    - DnaName: eyeRotation
       MinValue: 0
       MaxValue: 1
       Delete: 0
@@ -345,7 +281,59 @@ MonoBehaviour:
       MinValue: 0
       MaxValue: 1
       Delete: 0
+    - DnaName: cheekPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: cheekSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: chinSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: chinPronounced
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: chinPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: earsSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: earsPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: eyeSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: eyeRotation
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: eyeSpacing
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: jawsSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
     - DnaName: jawsPosition
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: mandibleSize
+      MinValue: 0
+      MaxValue: 1
+      Delete: 0
+    - DnaName: upperWeight
       MinValue: 0
       MaxValue: 1
       Delete: 0
@@ -407,6 +395,6 @@ MonoBehaviour:
     - breastSize
     - breastCleavage
     - eyeSpacing
-    SelectedDNA: 34
+    SelectedDNA: 13
     DNAAdd: 
     DNADel: 0

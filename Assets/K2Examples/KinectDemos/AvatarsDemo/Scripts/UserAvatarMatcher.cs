@@ -119,8 +119,16 @@ public class UserAvatarMatcher : MonoBehaviour
 	}
 
 	public CustomGenerator UMAGenerator;
-	// creates avatar for the given user
+
 	private GameObject CreateUserAvatar(long userId, int userIndex)
+	{
+		GameObject createdObject = new GameObject("User-" + userId);
+		CreateUserAvatar_Delay(userId, userIndex, createdObject.transform);
+		return createdObject;
+	}
+
+	// creates avatar for the given user
+	private async void CreateUserAvatar_Delay(long userId, int userIndex, Transform parent)
 	{
 		GameObject avatarObj = null;
 
@@ -129,9 +137,19 @@ public class UserAvatarMatcher : MonoBehaviour
 			Vector3 userPos = new Vector3(userIndex, 0, 0);
 			Quaternion userRot = Quaternion.Euler(!mirroredMovement ? Vector3.zero : new Vector3(0, 180, 0));
 
-			avatarObj = UMAGenerator.GetNewUMA();
+			if(LogBonesNameMap.instance.TempKinectCrateSource)
+				//avatarObj = Instantiate(LogBonesNameMap.instance.TempKinectCrateSource, userPos, userRot);
+				avatarObj = LogBonesNameMap.instance.TempKinectCrateSource;
+			else
+				avatarObj = UMAGenerator.GetNewUMA(new Vector3(0, 0, -100), userRot);
+
 			//avatarObj = Instantiate(avatarModel, userPos, userRot);
 			avatarObj.name = "User-" + userId;
+			
+			await Task.Delay(100);
+
+			avatarObj.transform.position = userPos;
+			avatarObj.transform.parent = parent;
 
 			AvatarController ac = avatarObj.GetComponent<AvatarController>();
 			if (ac == null) 
@@ -166,8 +184,6 @@ public class UserAvatarMatcher : MonoBehaviour
 				}
 			}
 		}
-
-		return avatarObj;
 	}
 
 	// destroys the avatar and refreshes the list of avatar controllers

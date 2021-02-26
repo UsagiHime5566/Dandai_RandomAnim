@@ -5,6 +5,7 @@ using UnityEngine;
 public class LogBonesNameMap : HimeLib.SingletonMono<LogBonesNameMap>
 {
     public AvatarController source;
+    public GameObject TempKinectCrateSource;
 
     public List<MapBone> MapBones;
     
