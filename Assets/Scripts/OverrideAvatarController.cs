@@ -21,6 +21,5 @@ public class OverrideAvatarController : AvatarController
     [EasyButtons.Button]
     void SopAnimation(){
         var anim = GetComponent<Animator>();
-        anim.StopPlayback();
     }
 }

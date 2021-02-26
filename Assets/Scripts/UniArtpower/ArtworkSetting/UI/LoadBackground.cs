@@ -9,6 +9,7 @@ public class LoadBackground : MonoBehaviour
     [Header("要貼到的目標 Mesh")] public MeshRenderer targetMesh;
     [Header("要貼到的目標 RawImage")] public RawImage targetRawImage;
     [Header("檔案名稱(*.jpg , *.png)")] public string fileName = @"background";
+    [Header("重新讀取")] public Button BTN_Reload;
     [HimeLib.HelpBox] public string tip = "檔案尺寸必須是1920x1080";
     string fileSuffixJPG = @".jpg";
     string fileSuffixPNG = @".png";
@@ -30,6 +31,10 @@ public class LoadBackground : MonoBehaviour
 
         Debug.Log("Use Background file : " + useUrl);
         DoLoadBackground();
+
+        BTN_Reload?.onClick.AddListener(delegate {
+            DoLoadBackground();
+        });
 
         //From internet
         //string netUrl = "https://i.imgur.com/DpRAzV5.png";

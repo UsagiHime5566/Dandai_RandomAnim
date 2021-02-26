@@ -15,10 +15,10 @@ public class CaptureRectToFile : MonoBehaviour
 
     public void StartCapture(){
         OnPreSave?.Invoke();
-        StartCoroutine(CaptureByUI(ToSaveArea, "background"));
+        StartCoroutine(CaptureByUI(ToSaveArea, "background", true));
     }
 
-    public IEnumerator CaptureByUI(RectTransform UIRect, string mFileName)
+    public IEnumerator CaptureByUI(RectTransform UIRect, string mFileName, bool saveFile = false)
     {
         //等待帧画面渲染结束
         yield return new WaitForEndOfFrame();
@@ -43,12 +43,12 @@ public class CaptureRectToFile : MonoBehaviour
         tex.Apply();
         byte[] bytes = tex.EncodeToPNG();
 
-    #if UNITY_EDITOR
         //保存
-        // string path = Application.dataPath + "/../" + mFileName + ".png";
-        // System.IO.File.WriteAllBytes(path, bytes);
-        // Debug.Log($"Save to path:{path}");
-    #endif
+        if(saveFile){
+            string path = Application.dataPath + "/../" + mFileName + ".png";
+            System.IO.File.WriteAllBytes(path, bytes);
+            Debug.Log($"Save to path:{path}");
+        }
 
         string encodedText = System.Convert.ToBase64String (bytes);
         OnSaved?.Invoke(encodedText);
