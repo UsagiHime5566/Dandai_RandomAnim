@@ -12,6 +12,7 @@ public class LocalPlayer : MonoBehaviour
         serverPlayer.OnServerStartPlay += PlayLocalPlay;
     }
 
+    [EasyButtons.Button]
     void PlayLocalPlay(){
         videoPlayer.time = 0;
         videoPlayer.Play();
