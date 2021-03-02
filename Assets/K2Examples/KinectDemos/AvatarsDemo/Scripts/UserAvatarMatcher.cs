@@ -123,6 +123,7 @@ public class UserAvatarMatcher : MonoBehaviour
 	private GameObject CreateUserAvatar(long userId, int userIndex)
 	{
 		GameObject createdObject = new GameObject("User-" + userId);
+		createdObject.AddComponent<AutoDestroy>();
 		CreateUserAvatar_Delay(userId, userIndex, createdObject.transform);
 		return createdObject;
 	}

@@ -1793,12 +1793,6 @@ PrefabInstance:
       propertyPath: ShowPlaceholder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2885161576314354680, guid: 11b6342601a487e45a8ca8ed561a9b7a,
-        type: 3}
-      propertyPath: Randomizers.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: a8c069992086fe94e8b53a3f2c1e3fcd,
-        type: 2}
     - target: {fileID: 2885161576785209578, guid: 11b6342601a487e45a8ca8ed561a9b7a,
         type: 3}
       propertyPath: m_RootOrder
