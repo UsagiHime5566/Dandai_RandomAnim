@@ -18,13 +18,18 @@ MonoBehaviour:
   DisplayValue: RPG Shirt 1
   compatibleRaces:
   - HumanFemaleDCS
+  - Anime Female
   wardrobeRecipeThumbs:
   - race: HumanFemaleDCS
+    filename: 
+    thumb: {fileID: 0}
+  - race: Anime Female
     filename: 
     thumb: {fileID: 0}
   wardrobeSlot: Chest
   Hides:
   - FemaleTorso
+  - F_Anime_Torso
   HideTags: []
   suppressWardrobeSlots: []
   activeWardrobeSet: []

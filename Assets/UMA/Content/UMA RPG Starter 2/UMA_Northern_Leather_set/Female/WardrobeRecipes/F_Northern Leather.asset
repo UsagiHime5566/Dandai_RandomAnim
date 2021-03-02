@@ -3,19 +3,23 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae7341e07d1b8f41aa37f5e2c910168, type: 3}
   m_Name: F_Northern Leather
   m_EditorClassIdentifier: 
+  label: 
+  resourcesOnly: 0
   recipeType: WardrobeCollection
   DisplayValue: 
   compatibleRaces:
   - HumanFemale
   - HumanFemaleDCS
+  - Anime Female
   wardrobeRecipeThumbs:
   - race: HumanFemale
     filename: 
@@ -23,10 +27,15 @@ MonoBehaviour:
   - race: HumanFemaleDCS
     filename: 
     thumb: {fileID: 0}
+  - race: Anime Female
+    filename: 
+    thumb: {fileID: 0}
   wardrobeSlot: NorthernLeather
   Hides: []
+  HideTags: []
   suppressWardrobeSlots: []
   activeWardrobeSet: []
+  MeshHideAssets: []
   recipeString: '{"packedRecipeType":"WardrobeCollection","name":"F_Northern Leather","race":"","dna":[],"characterColors":[],"wardrobeSet":[],"raceAnimatorController":""}'
   coverImages: []
   wardrobeCollection:
@@ -46,5 +55,7 @@ MonoBehaviour:
       - slot: Feet
         recipe: F_Northern Leather Boots
     - targetRace: HumanFemaleDCS
+      wardrobeSet: []
+    - targetRace: Anime Female
       wardrobeSet: []
   arbitraryRecipes: []
