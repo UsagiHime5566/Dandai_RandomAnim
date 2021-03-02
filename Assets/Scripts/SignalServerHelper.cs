@@ -9,11 +9,17 @@ public class SignalServerHelper : MonoBehaviour
 {
     [HimeLib.HelpBox] public string tip = "負責讀入txt, 藉此設定Server 相關設定";
     public string fileName = "Server.txt";
+    public UnityEngine.UI.Text TXT_Debug;
+    public int maxQueueNum = 10;
     
     //Root dictionary of application , without '/'
     string exePath, filePath;
     SignalServer signalServer;
     ServerPlayer serverPlayer;
+
+    Queue<string> queueMessage;
+    System.Action passMainThread;
+    
 
     void Awake(){
         signalServer = GetComponent<SignalServer>();
@@ -25,6 +31,13 @@ public class SignalServerHelper : MonoBehaviour
     void Start()
     {
         ReadFileForServer();
+    }
+
+    void Update(){
+        if(passMainThread != null){
+            passMainThread?.Invoke();
+            passMainThread = null;
+        }
     }
 
     void ReadFileForServer(){
@@ -56,5 +69,25 @@ public class SignalServerHelper : MonoBehaviour
             signalServer.EndToken = _EndToken;
 
         signalServer.InitSocket();
+
+        // Debug message
+        queueMessage = new Queue<string>();
+        if(TXT_Debug){
+            TXT_Debug.text = "";
+            signalServer.OnServerLogs += x => {
+                passMainThread += delegate {
+                    queueMessage.Enqueue(x);
+                    if(queueMessage.Count > maxQueueNum){
+                        queueMessage.Dequeue();
+                    }
+
+                    TXT_Debug.text = "";
+                    foreach (var item in queueMessage)
+                    {
+                        TXT_Debug.text += item + "\n";
+                    }
+                };
+            };
+        }
     }
 }

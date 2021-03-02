@@ -6,6 +6,7 @@ using UnityEngine;
 public class AutoDestroy : MonoBehaviour
 {
     public int removeTime = 5;
+    public float removeThreshold = 0.0001f;
 
     Transform anChild;
 
@@ -33,8 +34,11 @@ public class AutoDestroy : MonoBehaviour
         while(true){
             
             float distance = Vector3.Distance(lastPoint, anChild.position);
-            if(distance < 0.1f){
+            if(distance < removeThreshold){
                 stackIndex += 1;
+                Debug.Log($"distance min {distance}");
+            } else {
+                stackIndex = 0;
             }
 
             if(stackIndex >= removeTime){

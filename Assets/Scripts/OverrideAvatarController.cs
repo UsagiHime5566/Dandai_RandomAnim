@@ -10,7 +10,7 @@ public class OverrideAvatarController : AvatarController
         {
             Transform obj = gameObject.transform.FindDeepChildCustom(item.boneName);
 
-            Debug.Log($"try find {item.boneName} , result:{obj}");
+            //Debug.Log($"try find {item.boneName} , result:{obj}");
 
             if(obj != null){
                 bones[item.index] = obj;

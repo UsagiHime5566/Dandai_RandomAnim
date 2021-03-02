@@ -19,6 +19,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
     [HimeLib.HelpBox] public string tip = "所有的訊息接編碼為UTF-8";
     public SocketSignalEvent OnSignalReceived;
     public UserConnectedEvent OnUserConnected;
+    public Action<string> OnServerLogs;
 
     [Header("Auto Work")]
     public bool runInStart = false;
@@ -64,7 +65,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
             connectThread[targetIndex].Start();
         }
         
-        Debug.Log($"Start Server at :{serverPort} , with {maxUsers} thread.");
+        DebugLog($"Start Server at :{serverPort} , with {maxUsers} thread.");
     }
 
     void ServerWork(int index)
@@ -104,7 +105,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
 
             if (clearString.Length > 1)
             {
-                Debug.Log($"TCP >> Recieved : {clearString[0]}");
+                DebugLog($"TCP >> Recieved : {clearString[0]}");
 
                 ActionQueue += delegate {
                     OnSignalReceived.Invoke(clearString[0]);
@@ -120,13 +121,13 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
             clientSockets[index].Close();
 
         //控制台輸出偵聽狀態
-        print($"Waiting for a client ({index})");
+        DebugLog($"Waiting for a client ({index})");
         //一旦接受連接，創建一個客戶端  
         clientSockets[index] = serverSocket.Accept();
         //獲取客戶端的IP和端口  
         IPEndPoint ipEndClient = (IPEndPoint)clientSockets[index].RemoteEndPoint;
         //輸出客戶端的IP和端口  
-        Debug.Log($"Thread ({index}) Connect with " + ipEndClient.Address.ToString() + ":" + ipEndClient.Port.ToString());
+        DebugLog($"Thread ({index}) Connect with " + ipEndClient.Address.ToString() + ":" + ipEndClient.Port.ToString());
 
         //連接成功則發送數據  
         //sendStr="Welcome to my server";
@@ -156,6 +157,7 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
     //Data to Glass can use UTF8
     public void SocketSend(string sendStr)
     {
+        int totalSend = 0;
         foreach (var clientSocket in clientSockets)
         {
             if (clientSocket == null)
@@ -171,12 +173,16 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
                 //發送  
                 clientSocket.Send(sendData, sendData.Length, SocketFlags.None);
 
-                Debug.Log ($"TCP >> Send: {toSend}");
+                DebugLog ($"TCP >> Send: {toSend}");
+
+                totalSend += 1;
             }
             catch(System.Exception e){
-                Debug.LogError(e.Message.ToString());
+                DebugLogError(e.Message.ToString());
             }
         }
+
+        DebugLog ($"TCP >> Total Send {totalSend} clients. ({System.DateTime.Now})");
     }
 
     void ClearThreads(){
@@ -216,13 +222,23 @@ public class SignalServer : HimeLib.SingletonMono<SignalServer>
         if (serverSocket != null)
         {
             serverSocket.Close();
-            print("diconnect.");
+            DebugLog("diconnect.");
         }
     }
 
     void OnApplicationQuit()
     {
         CloseSocket();
+    }
+
+    void DebugLog(string msg){
+        Debug.Log(msg);
+        OnServerLogs?.Invoke(msg);
+    }
+
+    void DebugLogError(string msg){
+        Debug.LogError(msg);
+        OnServerLogs?.Invoke(msg);
     }
 
     [Header("Signal Emulor")]
